@@ -381,8 +381,11 @@ func makeFuzzer(with configuration: Configuration) -> Fuzzer {
         (InputMutator(isTypeAware: true),   1),
         // Can be enabled for experimental use, ConcatMutator is a limited version of CombineMutator
         // (ConcatMutator(),                1),
-        (OperationMutator(),                1),
-        (CombineMutator(),                  1),
+        (OperationMutator(),                2),
+        (CombineMutator(),                  2),
+        (LoopInserter(),                  1),
+        (StatementWrapper(),                  1),
+        (MethodInvocator(),                  1),
         // Include this once it does more than just remove unneeded try-catch
         // (FixupMutator()),                1),
     ])
