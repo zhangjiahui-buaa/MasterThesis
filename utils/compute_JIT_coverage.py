@@ -2,6 +2,10 @@ import os
 
 # Directory path
 directory = '/home/jiahui/tmpJIT'
+profdir = '/home/jiahui/v8/v8/out/cov/profrawJIT'
+profdata = 'JIT.profdata'
+d8 = 'home/jiahui/v8/v8/out/cov/d8'
+result = "/home/jiahui/cov.txt"
 total = 1000
 counter = 0
 
@@ -12,7 +16,6 @@ files = [os.path.join(directory, filename) for filename in os.listdir(directory)
 files.sort(key=os.path.getctime, reverse = True)
 
 # Process files in the order of their creation time
-profdir = '/home/jiahui/v8/v8/out/cov/profrawJIT'
 for file_path in files:
     if file_path.endswith('.js'):
         counter += 1
@@ -24,7 +27,9 @@ for file_path in files:
 # merge all .porfraw file
 
 profraw_files = [os.path.join(profdir, filename) for filename in os.listdir(profdir) if filename.endswith('.profraw')]
-
-profdata = 'JIT.profdata'
 command = f"llvm-profdata-18 merge -o {profdata} {' '.join(profraw_files)}"
 os.system(command)
+
+
+# filter only JIT Compiler coverage
+command = f"llvm-cov-18 report -instr-profile {profdata} -object {d8} --ignore-filename-regex='^(../../include|../../src/(api|base|common|codegen)|../../src/[d-z]|../../third|gen|../../base)' > {result}"
