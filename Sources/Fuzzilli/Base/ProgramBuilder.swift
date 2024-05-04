@@ -238,7 +238,22 @@ public class ProgramBuilder {
             })
         }
     }
-
+    
+    public func randomPosInt() -> Int64 {
+        if(probability(0.2)) {
+            let result = chooseUniform(from: self.fuzzer.environment.interestingIntegers)
+            if(result >= 0) {return result}
+            else {return -result}
+        } else {
+            return withEqualProbability({
+                Int64.random(in: 0...0x10)
+            }, {
+                Int64.random(in: 0...0x10000)
+            }, {
+                Int64.random(in: 0...Int64(Int32.max))
+            }) 
+        }
+    }
     /// Returns a random integer value suitable as size of for example an array.
     /// The returned value is guaranteed to be positive.
     public func randomSize(upTo maximum: Int64 = 0x100000000) -> Int64 {

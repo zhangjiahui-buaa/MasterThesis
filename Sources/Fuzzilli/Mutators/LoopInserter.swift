@@ -41,15 +41,15 @@ public class LoopInserter: BaseInstructionMutator {
             let visVar = b.randomVariable(ofType: .integer)
             let loopVar: Variable
             if(visVar != nil){
-                var tmp = b.loadInt(9999)
+                var tmp = b.loadInt(b.randomPosInt())
                 let condition = b.compare(tmp, with: visVar!, using: Comparator.greaterThan)
                 loopVar = b.ternary(condition, tmp, visVar!)
             }else{
-                loopVar = b.loadInt(9999)
+                loopVar = b.loadInt(b.randomPosInt())
             }
 
             b.buildForLoop(i: { b.loadInt(0) }, { i in b.compare(i, with:  loopVar, using: .lessThan) }, { i in b.unary(.PostInc, i) }) { _ in
-                b.build(n: defaultCodeGenerationAmount, by: .generating)
+                b.build(n: buildSizeForJIT)
             }
             /*let loopVar = b.loadInt(0)
             b.buildWhileLoop({ b.compare(loopVar, with: b.loadInt(Int64.random(in: 0...10)), using: .lessThan) }) {

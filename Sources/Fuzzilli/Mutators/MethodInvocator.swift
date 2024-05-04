@@ -39,39 +39,44 @@ public class MethodInvocator: BaseInstructionMutator {
         if(b.context == Context.javascript && instr.isSimple){
             b.trace("Method Invocator")
             // create method
-            var control = b.loadBool(true)
-            let f = b.buildPlainFunction(with: b.randomParameters(), isStrict: probability(0.1)) { _ in
-                b.buildIf(control, ifBody: {
+            let randomFunction = b.randomVariable(ofType: .function())
+            let f = randomFunction != nil && probability(0.5) ? randomFunction : 
+                b.buildPlainFunction(with: b.randomParameters(), isStrict: probability(0.1)) { _ in
+                    b.build(30)
                     b.doReturn(b.randomVariable())
-                }) 
-                b.build(n: defaultCodeGenerationAmount, by: .generating)
-                b.doReturn(b.randomVariable())
-            }
+                }
             // compute loop variable
             let visVar = b.randomVariable(ofType: .integer)
             let loopVar: Variable
             if(visVar != nil){
-                var tmp = b.loadInt(9999)
+                var tmp = b.loadInt(b.randomPosInt())
                 let condition = b.compare(tmp, with: visVar!, using: Comparator.greaterThan)
                 loopVar = b.ternary(condition, tmp, visVar!)
             }else{
-                loopVar = b.loadInt(9999)
+                loopVar = b.loadInt(b.randomPosInt())
             }
 
             // call method like this
-            // control = true
             // for(...){
             //    f()
             // }
-            // control = false
             // f()
-            var fal = b.loadBool(false)
+            // random instr
+            // for(...){
+            //    f()
+            //}
+            b.buildForLoop(i: { b.loadInt(0) }, { i in b.compare(i, with: loopVar, using: .lessThan) }, { i in b.unary(.PostInc, i) }) { _ in
+                b.build(buildSizeForJIT)
+                b.callFunction(f, withArgs: b.randomArguments(forCalling: f))
+                b.build(buildSizeForJIT)
+            }
+            b.callFunction(f, withArgs: b.randomArguments(forCalling: f))
+            
+            // trigger recompilation
+            b.build(defaultCodeGenerationAmount)
             b.buildForLoop(i: { b.loadInt(0) }, { i in b.compare(i, with: loopVar, using: .lessThan) }, { i in b.unary(.PostInc, i) }) { _ in
                 b.callFunction(f, withArgs: b.randomArguments(forCalling: f))
-                b.build(n: defaultCodeGenerationAmount, by: .generating)
-            }
-            b.reassign(control, to: fal)
-            b.callFunction(f, withArgs: b.randomArguments(forCalling: f))
+            } 
             //b.dumpCurrentProgram()
         }
         b.adopt(instr)
