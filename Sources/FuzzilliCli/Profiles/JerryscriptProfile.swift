@@ -48,7 +48,7 @@ let jerryscriptProfile = Profile(
 
     disabledCodeGenerators: [],
     
-    disabledMutators: [],
+    disabledMutators: ["ProbingMutator", "ExplorationMutator"],
 
     additionalBuiltins: [
         "gc"                : .function([] => .undefined),
