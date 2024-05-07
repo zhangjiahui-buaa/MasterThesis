@@ -11,7 +11,7 @@ RUN useradd -m builder
 # Fetch Firefox source code
 RUN git clone https://github.com/mozilla/gecko-dev.git /home/builder/firefox
 WORKDIR /home/builder/firefox
-
+RUN ./mach bootstrap --application-choice=js
 # Docker will attempt to cache the output of every step. That's fine (and useful to speed things up, e.g. by avoiding
 # the need to download the entire source repository again every time!). However, whenever the following ARG is changed
 # (i.e. we are building a new version of the engine), a cache miss occurs (because the build context changed) and all
@@ -27,7 +27,7 @@ RUN git pull
 RUN git checkout $rev
 
 # Prepare for building
-RUN ./mach bootstrap --application-choice=js
+#RUN ./mach bootstrap --application-choice=js
 
 # Upload and apply patches
 ADD Patches Patches

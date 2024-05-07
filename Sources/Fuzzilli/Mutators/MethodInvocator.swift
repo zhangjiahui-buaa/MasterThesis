@@ -42,7 +42,7 @@ public class MethodInvocator: BaseInstructionMutator {
             let randomFunction = b.randomVariable(ofType: .function())
             let f = randomFunction != nil && probability(0.5) ? randomFunction : 
                 b.buildPlainFunction(with: b.randomParameters(), isStrict: probability(0.1)) { _ in
-                    b.build(30)
+                    b.build(n:30)
                     b.doReturn(b.randomVariable())
                 }
             // compute loop variable
@@ -66,16 +66,16 @@ public class MethodInvocator: BaseInstructionMutator {
             //    f()
             //}
             b.buildForLoop(i: { b.loadInt(0) }, { i in b.compare(i, with: loopVar, using: .lessThan) }, { i in b.unary(.PostInc, i) }) { _ in
-                b.build(buildSizeForJIT)
-                b.callFunction(f, withArgs: b.randomArguments(forCalling: f))
-                b.build(buildSizeForJIT)
+                b.build(n:buildSizeForJIT)
+                b.callFunction(f!, withArgs: b.randomArguments(forCalling: f!))
+                b.build(n:buildSizeForJIT)
             }
-            b.callFunction(f, withArgs: b.randomArguments(forCalling: f))
+            b.callFunction(f!, withArgs: b.randomArguments(forCalling: f!))
             
             // trigger recompilation
-            b.build(defaultCodeGenerationAmount)
+            b.build(n:defaultCodeGenerationAmount)
             b.buildForLoop(i: { b.loadInt(0) }, { i in b.compare(i, with: loopVar, using: .lessThan) }, { i in b.unary(.PostInc, i) }) { _ in
-                b.callFunction(f, withArgs: b.randomArguments(forCalling: f))
+                b.callFunction(f!, withArgs: b.randomArguments(forCalling: f!))
             } 
             //b.dumpCurrentProgram()
         }

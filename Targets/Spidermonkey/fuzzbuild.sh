@@ -22,7 +22,7 @@ ac_add_options --disable-shared-js
 ac_add_options --enable-js-fuzzilli
 ac_add_options --enable-fuzzing
 ac_add_options --enable-gczeal
-
+ac_add_options --disable-bootstrap
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-fuzzbuild
 EOF
 

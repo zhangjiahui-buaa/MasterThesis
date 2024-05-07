@@ -51,12 +51,12 @@ public class StatementWrapper: BaseInstructionMutator {
             var cond = b.loadBool(true)
             var op = b.loadBool(false)
             b.buildForLoop(i: { b.loadInt(0) }, { i in b.compare(i, with: loopVar, using: .lessThan) }, { i in b.unary(.PostInc, i) }) { _ in
-                b.build(buildSizeForJIT)
+                b.build(n:buildSizeForJIT)
                 b.buildIf(cond, ifBody: {
                     b.adopt(instr)
                     b.reassign(cond, to:op)
                 })
-                b.build(buildSizeForJIT)
+                b.build(n:buildSizeForJIT)
             }
             //b.dumpCurrentProgram()
         }else{

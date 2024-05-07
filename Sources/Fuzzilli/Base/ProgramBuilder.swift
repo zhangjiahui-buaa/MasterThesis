@@ -243,6 +243,7 @@ public class ProgramBuilder {
         if(probability(0.2)) {
             let result = chooseUniform(from: self.fuzzer.environment.interestingIntegers)
             if(result >= 0) {return result}
+            else if(result == Int64.min) {return -(result+1)}
             else {return -result}
         } else {
             return withEqualProbability({
