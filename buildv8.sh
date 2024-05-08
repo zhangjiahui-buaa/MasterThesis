@@ -13,7 +13,7 @@ bash /home/jiahui/MasterThesis/Targets/V8/fuzzbuild.sh
 bash /home/jiahui/MasterThesis/prepare.sh
 
 cd /home/jiahui/MasterThesis
-tmux new "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=v8 --timeout=1000 --storagePath=./v8 --jobs=4 --minimizationLimit=0.2 ~/v8/v8/out/fuzzbuild/d8 > v8JIT.log"
+tmux new -d "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=v8 --timeout=1000 --storagePath=./v8 --jobs=4 --minimizationLimit=0.2 /home/jiahui/v8/v8/out/fuzzbuild/d8 > v8JIT.log"
 
 cd /home/jiahui/fuzzilli
-tmux new "taskset -c 4,5,6,7 swift run -c release FuzzilliCli --profile=v8 --timeout=1000 --storagePath=./v8 --jobs=4 ~/v8/v8/out/fuzzbuild/d8 > v8.log"
+tmux new -d "taskset -c 4,5,6,7 swift run -c release FuzzilliCli --profile=v8 --timeout=1000 --storagePath=./v8 --jobs=4 /home/jiahui/v8/v8/out/fuzzbuild/d8 > v8.log"
