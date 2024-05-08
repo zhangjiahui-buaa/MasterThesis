@@ -22,3 +22,4 @@ wget https://download.swift.org/swift-5.9.2-release/ubuntu2204/swift-5.9.2-RELEA
 tar zxvf ./swift-5.9.2-RELEASE-ubuntu22.04.tar.gz
 export PATH=/home/$USER/swift-5.9.2-RELEASE-ubuntu22.04/usr/bin:${PATH}
 echo 'export PATH=/home/$USER/swift-5.9.2-RELEASE-ubuntu22.04/usr/bin:${PATH}' >> /home/$USER/.bashrc
+source /home/$USER/.bashrc

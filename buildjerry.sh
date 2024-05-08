@@ -7,6 +7,9 @@ git clone https://github.com/jerryscript-project/jerryscript
 cd jerryscript
 git checkout 8ba0d1b6ee5a065a42f3b306771ad8e3c0d819bc
 git apply /home/$USER/MasterThesis/Targets/Jerryscript/Patches/jerryscript.patch
+sudo apt install cmake
+sudo apt install clang
+sudo ln -s /usr/bin/python3 /usr/bin/python
 bash /home/$USER/MasterThesis/Targets/Jerryscript/fuzzbuild.sh
 
 cd /home/$USER/MasterThesis
