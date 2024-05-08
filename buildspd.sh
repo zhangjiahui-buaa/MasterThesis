@@ -3,7 +3,7 @@ sudo apt update
 sudo apt install docker.io
 cd /home/$USER
 git clone https://github.com/googleprojectzero/fuzzilli.git
-bash /home/$USER/MasterThesis/prepare.sh
+bash /home/$USER/MasterThesis/prepare.sh $USER
 cd /home/$USER/MasterThesis/Cloud/Docker
 sudo bash build.sh spidermonkey 
 

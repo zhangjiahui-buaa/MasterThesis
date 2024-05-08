@@ -2,7 +2,7 @@ USER=$1
 cd /home/$USER
 git clone https://github.com/googleprojectzero/fuzzilli.git
 git clone https://github.com/zhang$USER-buaa/MasterThesis.git
-bash /home/$USER/MasterThesis/prepare.sh
+bash /home/$USER/MasterThesis/prepare.sh $USER
 cd /home/$USER
 git clone https://github.com/jerryscript-project/jerryscript
 cd jerryscript
