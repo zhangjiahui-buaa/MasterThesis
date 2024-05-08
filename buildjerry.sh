@@ -10,7 +10,7 @@ git apply /home/jiahui/MasterThesis/Targets/Jerryscript/Patches/jerryscript.patc
 bash /home/jiahui/MasterThesis/Targets/Jerryscript/fuzzbuild.sh
 
 cd /home/jiahui/MasterThesis
-tmux new -d "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=jerryscript --timeout=1000 --storagePath=./jerryscript --jobs=4 --minimizationLimit=0.2 /home/jiahui/jerryscript/build/bin/jerry > jerryJIT.log"
+tmux new -d "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=jerryscript --timeout=1000 --storagePath=./jerryscript --jobs=4 --minimizationLimit=0.2 --exportStatistics --statisticsExportInterval=5 /home/jiahui/jerryscript/build/bin/jerry"
 
 cd /home/jiahui/fuzzilli
-tmux new -d "taskset -c 4,5,6,7 swift run -c release FuzzilliCli --profile=jerryscript --timeout=1000 --storagePath=./jerryscript --jobs=4 /home/jiahui/jerryscript/build/bin/jerry > jerryJIT.log"
+tmux new -d "taskset -c 4,5,6,7 swift run -c release FuzzilliCli --profile=jerryscript --timeout=1000 --storagePath=./jerryscript --jobs=4  --exportStatistics --statisticsExportInterval=5 /home/jiahui/jerryscript/build/bin/jerry"
