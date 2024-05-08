@@ -1,7 +1,7 @@
 cd ~
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 export PATH=~/depot_tools:$PATH
-git clone https://github.com/zhangjiahui-buaa/MasterThesis.git
+git clone https://github.com/googleprojectzero/fuzzilli.git
 gclient
 mkdir ~/v8
 cd ~/v8

@@ -1,7 +1,7 @@
 sudo apt update 
 sudo apt install docker.io
 cd ~
-git clone https://github.com/zhangjiahui-buaa/MasterThesis.git
+git clone https://github.com/googleprojectzero/fuzzilli.git
 bash ~/MasterThesis/prepare.sh
 cd ~/MasterThesis
 bash Cloud/Docker/build.sh spidermonkey 
