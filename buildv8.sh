@@ -11,6 +11,7 @@ gclient sync
 ./build/install-build-deps.sh
 bash /home/jiahui/MasterThesis/Targets/V8/fuzzbuild.sh
 bash /home/jiahui/MasterThesis/prepare.sh
+
 cd /home/jiahui/MasterThesis
 tmux new "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=v8 --timeout=1000 --storagePath=./v8 --jobs=4 --minimizationLimit=0.2 ~/v8/v8/out/fuzzbuild/d8 > v8JIT.log"
 
