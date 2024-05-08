@@ -1,6 +1,9 @@
 sudo apt update 
 sudo apt install docker.io
-bash ~/prepare.sh
+cd ~
+git clone https://github.com/googleprojectzero/fuzzilli.git
+git clone https://github.com/zhangjiahui-buaa/MasterThesis.git
+bash ~/MasterThesis/prepare.sh
 cd ~/MasterThesis
 bash Cloud/Docker/build.sh spidermonkey 
 tmux new "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=spidermonkey --timeout=1000 --storagePath=./spidermonkey --jobs=4 --minimizationLimit=0.2 ~/MasterThesis/Cloud/Docker/SpidermonkeyBuilder/out/js > SpidermonkeyJIT.log"

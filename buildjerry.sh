@@ -1,4 +1,7 @@
-bash ~/prepare.sh
+cd ~
+git clone https://github.com/googleprojectzero/fuzzilli.git
+git clone https://github.com/zhangjiahui-buaa/MasterThesis.git
+bash ~/MasterThesis/prepare.sh
 cd ~
 git clone https://github.com/jerryscript-project/jerryscript
 cd jerryscript
