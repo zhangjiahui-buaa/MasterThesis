@@ -1,13 +1,14 @@
+USER=$1
 sudo apt update 
 sudo apt install docker.io
-cd /home/jiahui
+cd /home/$USER
 git clone https://github.com/googleprojectzero/fuzzilli.git
-bash /home/jiahui/MasterThesis/prepare.sh
-cd /home/jiahui/MasterThesis/Cloud/Docker
+bash /home/$USER/MasterThesis/prepare.sh
+cd /home/$USER/MasterThesis/Cloud/Docker
 sudo bash build.sh spidermonkey 
 
-cd /home/jiahui/MasterThesis
-tmux new -d "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=spidermonkey --timeout=1000 --storagePath=./spidermonkey --jobs=4 --minimizationLimit=0.2 --exportStatistics --statisticsExportInterval=5 /home/jiahui/MasterThesis/Cloud/Docker/SpidermonkeyBuilder/out/js"
+cd /home/$USER/MasterThesis
+tmux new -d "taskset -c 0,1,2,3 swift run -c release FuzzilliCli --profile=spidermonkey --timeout=1000 --storagePath=./spidermonkey --jobs=4 --minimizationLimit=0.2 --exportStatistics --statisticsExportInterval=5 /home/$USER/MasterThesis/Cloud/Docker/SpidermonkeyBuilder/out/js"
 
-cd /home/jiahui/fuzzilli
-tmux new -d "taskset -c 4,5,6,7 swift run -c release FuzzilliCli --profile=spidermonkey --timeout=1000 --storagePath=./spidermonkey --jobs=4 --exportStatistics --statisticsExportInterval=5 /home/jiahui/MasterThesis/Cloud/Docker/SpidermonkeyBuilder/out/js"
+cd /home/$USER/fuzzilli
+tmux new -d "taskset -c 4,5,6,7 swift run -c release FuzzilliCli --profile=spidermonkey --timeout=1000 --storagePath=./spidermonkey --jobs=4 --exportStatistics --statisticsExportInterval=5 /home/$USER/MasterThesis/Cloud/Docker/SpidermonkeyBuilder/out/js"
