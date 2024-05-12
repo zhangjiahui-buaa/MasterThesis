@@ -49,11 +49,11 @@ public class MethodInvocator: BaseInstructionMutator {
             let visVar = b.randomVariable(ofType: .integer)
             let loopVar: Variable
             if(visVar != nil){
-                var tmp = b.loadInt(b.randomPosInt())
+                var tmp = b.loadInt(Int64.random(in: 100...10000))
                 let condition = b.compare(tmp, with: visVar!, using: Comparator.greaterThan)
                 loopVar = b.ternary(condition, tmp, visVar!)
             }else{
-                loopVar = b.loadInt(b.randomPosInt())
+                loopVar = b.loadInt(Int64.random(in: 100...10000))
             }
 
             // call method like this
