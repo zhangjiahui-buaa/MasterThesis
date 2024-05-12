@@ -373,19 +373,19 @@ func makeFuzzer(with configuration: Configuration) -> Fuzzer {
     /// The mutation fuzzer responsible for mutating programs from the corpus and evaluating the outcome.
     let disabledMutators = Set(profile.disabledMutators)
     var mutators = WeightedList([
-        (ExplorationMutator(),              3),
-        (CodeGenMutator(),                  2),
-        (SpliceMutator(),                   2),
-        (ProbingMutator(),                  2),
-        (InputMutator(isTypeAware: false),  2),
-        (InputMutator(isTypeAware: true),   1),
+        (ExplorationMutator(),              6),
+        (CodeGenMutator(),                  4),
+        (SpliceMutator(),                   4),
+        (ProbingMutator(),                  4),
+        (InputMutator(isTypeAware: false),  4),
+        (InputMutator(isTypeAware: true),   2),
         // Can be enabled for experimental use, ConcatMutator is a limited version of CombineMutator
         // (ConcatMutator(),                1),
-        (OperationMutator(),                2),
-        (CombineMutator(),                  2),
-        (LoopInserter(),                  1),
-        (StatementWrapper(),                  1),
-        (MethodInvocator(),                  1),
+        (OperationMutator(),                4),
+        (CombineMutator(),                  4),
+        //(LoopInserter(),                  2),
+        //(StatementWrapper(),                  1),
+        //(MethodInvocator(),                  1),
         // Include this once it does more than just remove unneeded try-catch
         // (FixupMutator()),                1),
     ])

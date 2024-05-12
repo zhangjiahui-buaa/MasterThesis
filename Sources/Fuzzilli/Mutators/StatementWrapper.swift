@@ -42,11 +42,11 @@ public class StatementWrapper: BaseInstructionMutator {
             let visVar = b.randomVariable(ofType: .integer)
             let loopVar: Variable
             if(visVar != nil){
-                var tmp = b.loadInt(Int64.random(in: 100...10000))
+                var tmp = b.loadInt(Int64.random(in: 100...500))
                 let condition = b.compare(tmp, with: visVar!, using: Comparator.greaterThan)
                 loopVar = b.ternary(condition, tmp, visVar!)
             }else{
-                loopVar = b.loadInt(Int64.random(in: 100...10000))
+                loopVar = b.loadInt(Int64.random(in: 100...500))
             }
             var cond = b.loadBool(true)
             var op = b.loadBool(false)
