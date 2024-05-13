@@ -41,7 +41,7 @@ plt.xlabel('Total Samples')
 plt.ylabel('Coverage')
 plt.title('Coverage trend w.r.t Total Samples')
 # Example usage
-file_path = 'v8JIT2_new.log'
+file_path = 'result5.txt'
 
 total_samples = get_lines_with_prefix(file_path, "Total Samples:")
 print(len(total_samples))
@@ -49,15 +49,19 @@ interesting_samples = get_lines_with_prefix(file_path, "Interesting Samples Foun
 print(len(interesting_samples))
 coverages = get_lines_with_prefix(file_path, "Coverage:")
 print(len(coverages))
+if len(total_samples) > len(coverages):
+    total_samples = total_samples[:-1]
 plt.plot(total_samples, coverages, label='New Model')
 
-file_path = 'v8Compare_new.log'
+file_path = 'result4.txt'
 total_samples = get_lines_with_prefix(file_path, "Total Samples:")
 print(len(total_samples))
 interesting_samples = get_lines_with_prefix(file_path, "Interesting Samples Found:")
 print(len(interesting_samples))
 coverages = get_lines_with_prefix(file_path, "Coverage:")
 print(len(coverages))
+if len(total_samples) > len(coverages):
+    total_samples = total_samples[:-1]
 plt.plot(total_samples, coverages, label='Baseline')
 
 # Add legend
